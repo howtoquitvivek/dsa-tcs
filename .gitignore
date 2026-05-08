@@ -1,0 +1,14 @@
+# Ignore files without extension
+*
+
+# Keep directories
+!*/
+
+# Keep C++ files
+!*.cpp
+
+# Keep markdown files
+!*.md
+
+# Keep gitignore itself
+!.gitignore
