@@ -12,3 +12,7 @@
 
 # Keep gitignore itself
 !.gitignore
+
+bin/
+
+tempCodeRunnerFile.cpp
