@@ -22,6 +22,7 @@ int main(){
     cout<<"Enter r and c: ";
     cin>>r>>c;
 
+    // Edge Case: If r <= 0 or c <= 0, vector initialization will throw an error or behave unexpectedly. Ideally, check `if(r<=0 || c<=0) return 0;`.
     vector<vector<int>> vec1(r, vector<int>(c));
     vector<vector<int>> vec2(r, vector<int>(c));
     vector<vector<int>> vec3(r, vector<int>(c));
@@ -41,6 +42,8 @@ int main(){
     }
 
 
+    // Logic: Matrix addition requires dimensions of both matrices to be strictly the same.
+    // Iterate through each cell and add corresponding elements.
     for(int i=0; i<r; i++){
         for(int j=0; j<c; j++){
             vec3[i][j] = vec1[i][j] + vec2[i][j];
@@ -57,3 +60,17 @@ int main(){
 
     return 0;
 }
+
+/*
+ALTERNATIVE APPROACHES:
+1. In-Place Addition:
+   - Logic: Instead of allocating a third matrix `vec3`, add `vec2[i][j]` directly to `vec1[i][j]`.
+   - Time Complexity: O(R * C)
+   - Space Complexity: O(1) extra space beyond the two input matrices.
+   - Advantage: Saves O(R * C) memory if the original matrices don't need to be preserved.
+
+2. Matrix Addition using 1D Array representation:
+   - Logic: A 2D matrix can be flattened into a 1D array of size `r*c`. `index = i*c + j`.
+   - Time Complexity: O(R * C)
+   - Space Complexity: O(R * C)
+*/
