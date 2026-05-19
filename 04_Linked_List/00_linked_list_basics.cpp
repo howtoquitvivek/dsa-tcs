@@ -202,73 +202,6 @@ int length(Node* head){
     return count;
 }
 
-
-/*
-========================================================
-                REVERSE LINKED LIST
-========================================================
-
-10 -> 20 -> 30 -> NULL
-
-becomes:
-
-30 -> 20 -> 10 -> NULL
-
-========================================================
-*/
-
-Node* reverseList(Node* head){
-
-    Node* prev = NULL;
-    Node* curr = head;
-
-    while(curr != NULL){
-
-        Node* nextNode = curr->next;
-
-        curr->next = prev;
-
-        prev = curr;
-
-        curr = nextNode;
-    }
-
-    return prev;
-}
-
-
-/*
-========================================================
-                MIDDLE NODE
-========================================================
-
-Slow-Fast Pointer Technique
-
-slow -> moves 1 step
-fast -> moves 2 steps
-
-When fast reaches end,
-slow reaches middle.
-
-========================================================
-*/
-
-Node* middleNode(Node* head){
-
-    Node* slow = head;
-    Node* fast = head;
-
-    while(fast != NULL && fast->next != NULL){
-
-        slow = slow->next;
-
-        fast = fast->next->next;
-    }
-
-    return slow;
-}
-
-
 /*
 ========================================================
                         MAIN
@@ -340,30 +273,6 @@ int main(){
     cout << "\nLength:\n";
 
     cout << length(head) << "\n";
-
-    /*
-    ====================================================
-                    MIDDLE NODE
-    ====================================================
-    */
-
-    Node* mid = middleNode(head);
-
-    cout << "\nMiddle Node:\n";
-
-    cout << mid->data << "\n";
-
-    /*
-    ====================================================
-                    REVERSE LIST
-    ====================================================
-    */
-
-    head = reverseList(head);
-
-    cout << "\nReversed List:\n";
-
-    printList(head);
 
     return 0;
 }
