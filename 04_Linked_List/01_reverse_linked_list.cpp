@@ -169,16 +169,16 @@ using namespace std;
 
 class Node{
 
-public:
+    public:
 
-    int data;
-    Node* next;
+        int data;
+        Node* next;
 
-    Node(int val){
+        Node(int val){
 
-        data = val;
-        next = NULL;
-    }
+            data = val;
+            next = NULL;
+        }
 };
 
 void printList(Node* head){
@@ -196,47 +196,176 @@ void printList(Node* head){
 }
 
 Node* reverseList(Node* head){
-
     Node* prev = NULL;
-
     Node* curr = head;
 
     while(curr != NULL){
-
-        // save next node
         Node* nextNode = curr->next;
-
-        // reverse link
         curr->next = prev;
-
-        // move prev
         prev = curr;
-
-        // move curr
         curr = nextNode;
     }
-
-    // prev becomes new head
-    return prev;
+    head = prev;
+    return head;
 }
 
 int main(){
 
     Node* head = new Node(10);
-
     head->next = new Node(20);
-
     head->next->next = new Node(30);
 
     cout << "Original List:\n";
-
     printList(head);
 
     head = reverseList(head);
 
     cout << "\nReversed List:\n";
-
     printList(head);
 
     return 0;
 }
+
+/*
+========================================================
+        REVERSE LINKED LIST KI IMPORTANT THEORY
+========================================================
+
+Starting me confusion hota hai kyuki naturally lagta hai:
+
+"Next node ko reverse karna hai"
+
+Lekin actual linked list reversal aise nahi hota.
+
+========================================================
+                GALAT SOCH
+========================================================
+
+Agar socho:
+
+nextNode->next = curr
+
+toh hum future node ko reverse karne ki
+koshish kar rahe hain.
+
+Lekin linked list reversal ka main idea hai:
+
+CURRENT node ka direction ulta karna.
+
+========================================================
+                SAHI SOCH
+========================================================
+
+Hamesha socho:
+
+"Current node ko previous node ki taraf point karwana hai"
+
+Main operation:
+
+curr->next = prev
+
+Yehi actual reversal step hai.
+
+========================================================
+                SABSE IMPORTANT REALIZATION
+========================================================
+
+Initially:
+
+prev = NULL
+curr = head
+
+Example:
+
+10 -> 20 -> 30 -> NULL
+
+First iteration me:
+
+curr = 10
+prev = NULL
+
+Toh:
+
+curr->next = prev
+
+banega:
+
+10 -> NULL
+
+Ye bahut important hai kyuki:
+
+10 reversed linked list ka LAST node banega.
+
+========================================================
+                nextNode KYU CHAHIYE?
+========================================================
+
+Original:
+
+10 -> 20
+
+Agar directly kar diya:
+
+10 -> NULL
+
+toh 20 ka address permanently lost ho jayega.
+
+Isliye reverse karne se pehle:
+
+next node ko save karte hain.
+
+Example:
+
+nextNode = curr->next
+
+Ab 20 safely stored hai.
+
+========================================================
+                POINTER MOVEMENT
+========================================================
+
+Link reverse karne ke baad:
+
+prev = curr
+curr = nextNode
+
+Isse traversal original linked list me
+aage badhta rehta hai.
+
+========================================================
+                IMPORTANT INSIGHT
+========================================================
+
+curr naturally original linked list ke end tak
+move karta rehta hai.
+
+Finally:
+
+curr == NULL
+
+iska matlab:
+saare nodes process ho gaye.
+
+Aur us moment pe:
+
+prev new head ban jata hai
+reversed linked list ka.
+
+========================================================
+                MENTAL MODEL
+========================================================
+
+Har step pe:
+
+1. next save karo
+2. current link reverse karo
+3. pointers aage move karo
+
+Core pattern:
+
+save next
+reverse current
+move forward
+
+========================================================
+*/
