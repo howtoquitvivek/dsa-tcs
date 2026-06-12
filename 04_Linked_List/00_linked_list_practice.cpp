@@ -78,10 +78,10 @@ void deleteHeadLL(Node* &head){
 
 }
 
-void searchLL(Node* head, int target){
+bool searchLL(Node* head, int target){
     //Return if empty
     if(head == NULL){
-        return;
+        return false;
     }
 
     Node* temp = head;
